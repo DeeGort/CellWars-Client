@@ -5,9 +5,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * Created by Tamás on 2015-04-30.
+ * Created by Tamï¿½s on 2015-04-30.
  */
 public class ClientConnection {
 
@@ -30,11 +32,10 @@ public class ClientConnection {
     }
 
     public void sendMessage(String ... message) throws IOException {
-        StringJoiner sj = new StringJoiner(":");
-        for (String s : message)
-            sj.add(s);
-        out.writeUTF(sj.toString());
+        String joinedMessage = Stream.of(message)
+                .collect(Collectors.joining(":"));
 
+        out.writeUTF(joinedMessage);
     }
 
     public String getMessage() throws IOException {

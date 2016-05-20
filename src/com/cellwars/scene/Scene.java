@@ -6,13 +6,12 @@ import com.cellwars.client.Scheduler;
 import com.sun.javafx.geom.Vec2d;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Tamás on 2015-05-01.
+ * Created by Tamï¿½s on 2015-05-01.
  */
 public class Scene {
 
@@ -32,10 +31,10 @@ public class Scene {
         this.mines = new ArrayList<>();
     }
 
-    public void initRules(Rectangle map, float cellRadius, float packageRadius) {
-        Rules.MAP = map;
-        Rules.CELLRADIUS = cellRadius;
-        Rules.PACKAGERADIUS = packageRadius;
+    public void initRules(Map map, float cellRadius, float packageRadius) {
+        Rules.getRules().setMap(map);
+        Rules.getRules().setCellRadius(cellRadius);
+        Rules.getRules().setPackageRadius(packageRadius);
 
     }
 

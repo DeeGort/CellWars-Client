@@ -19,7 +19,7 @@ import javafx.util.Duration;
 
 
 /**
- * Created by Tamás on 2015-04-30.
+ * Created by Tamï¿½s on 2015-04-30.
  */
 public class SceneScreen {
 
@@ -139,7 +139,7 @@ public class SceneScreen {
     }
 
     public void drawMap() {
-        map = Rules.MAP;
+        map = Rules.getRules().getMap().convertToRectange();
         map.setFill(Color.web("#200010"));
 
         root.getChildren().add(map);

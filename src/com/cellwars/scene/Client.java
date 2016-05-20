@@ -1,12 +1,12 @@
 package com.cellwars.scene;
 
+import com.cellwars.actor.Map;
 import com.cellwars.client.Scheduler;
 import javafx.animation.AnimationTimer;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
- * Created by Tamás on 2015-04-30.
+ * Created by Tamï¿½s on 2015-04-30.
  */
 public class Client {
 
@@ -26,7 +26,7 @@ public class Client {
     public void start() {
         scheduler.start();
         scheduler.request("PLAYERINFO", player.getName(), player.getColor().toString());
-        waitForAnswer();
+        interpret(waitForAnswer());
         scheduler.request("NULL");
         gameLoop();
     }
@@ -36,25 +36,26 @@ public class Client {
             @Override
             public synchronized void handle(long now) {
                 scheduler.request("GETPLAYERS", player.getName());
-                waitForAnswer();
+                interpret(scheduler.tryToGetAnswer());
                 scheduler.request("GETCOOKIES");
-                waitForAnswer();
+                interpret(scheduler.tryToGetAnswer());
                 scheduler.request("GETMINES");
-                waitForAnswer();
+                interpret(scheduler.tryToGetAnswer());
 
                 // If an event occurred process it
-                interpret(scheduler.getAnswer());
+                interpret(scheduler.tryToGetAnswer());
             }
         };
         getstates.start();
     }
 
-    private void waitForAnswer() {
+    private String waitForAnswer() {
         String answer;
         do {
-            answer = scheduler.getAnswer();
+            answer = scheduler.tryToGetAnswer();
         } while (answer == null);
-        interpret(answer);
+
+        return answer;
     }
 
     private void interpret(String serverMessage) {
@@ -65,7 +66,7 @@ public class Client {
                     try {
                         String[] map = request[1].split(" ");
                         scene.initRules(
-                                new Rectangle(
+                                new Map(
                                         Double.parseDouble(map[0]),
                                         Double.parseDouble(map[1]),
                                         Double.parseDouble(map[2]),

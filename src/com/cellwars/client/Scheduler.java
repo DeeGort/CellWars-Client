@@ -1,15 +1,12 @@
 package com.cellwars.client;
 
-import com.cellwars.client.ClientConnection;
 import javafx.concurrent.Task;
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Created by Tamás on 2015-05-22.
+ * Created by Tamï¿½s on 2015-05-22.
  */
 public class Scheduler {
 
@@ -35,7 +32,7 @@ public class Scheduler {
         }
     }
 
-    public String getAnswer() {
+    public String tryToGetAnswer() {
         try {
             return !answerQueue.isEmpty() ? answerQueue.take() : "";
         } catch (InterruptedException e) {
